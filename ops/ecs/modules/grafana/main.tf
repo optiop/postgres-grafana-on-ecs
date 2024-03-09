@@ -15,7 +15,7 @@ resource "aws_ecs_task_definition" "task" {
   family                   = "grafana"
   network_mode             = "awsvpc"
   requires_compatibilities = ["EC2"]
-  cpu                      = 256 
+  cpu                      = 512
   memory                   = 512
   execution_role_arn       = aws_iam_role.execution_role.arn
 
@@ -23,8 +23,9 @@ resource "aws_ecs_task_definition" "task" {
     {
       name : "grafana",
       image : data.aws_ecr_repository.repository.repository_url,
+      container_name: "grafana",
       essential : true,
-      cpu : 256,
+      cpu : 512,
       memory : 512,
       environment : [
         {
@@ -54,8 +55,8 @@ resource "aws_ecs_task_definition" "task" {
       },
       portMappings : [
         {
-          containerPort : 8000,
-          hostPort : 8000,
+          containerPort : 3000,
+          hostPort : 3000,
         },
       ],
     },
@@ -94,7 +95,7 @@ resource "aws_ecs_service" "service" {
   load_balancer {
     target_group_arn = aws_lb_target_group.target_group.arn
     container_name   = "grafana"
-    container_port   = 8000
+    container_port   = 3000
   }
 
   service_registries {
@@ -145,13 +146,13 @@ resource "aws_lb_listener" "https" {
 
 resource "aws_lb_target_group" "target_group" {
   name        = "alb-tg"
-  port        = 8000
+  port        = 3000
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
 
   health_check {
-    path                = "/"
+    path                = "/api/health"
     protocol            = "HTTP"
     port                = "traffic-port"
     healthy_threshold   = 2
