@@ -15,17 +15,26 @@ resource "aws_ecs_task_definition" "task" {
   family                   = "postgres"
   network_mode             = "awsvpc"
   requires_compatibilities = ["EC2"]
-  cpu                      = 256 
-  memory                   = 512
+  cpu                      = 512
+  memory                   = 1024
   execution_role_arn       = aws_iam_role.execution_role.arn
 
   container_definitions = jsonencode([
     {
       name : "postgres",
       image : data.aws_ecr_repository.repository.repository_url,
+      container_name: "postgres",
+      container_port: 5432,
       essential : true,
-      cpu : 256,
-      memory : 512,
+      cpu : 512,
+      memory : 1024,
+      portMappings : [
+        {
+          containerPort : 5432,
+          hostPort      : 5432,
+          protocol      : "tcp"
+        }
+      ],
       logConfiguration : {
         logDriver : "awslogs",
         options : {
