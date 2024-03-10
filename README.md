@@ -18,7 +18,12 @@
   </a>
 
   <br>
-  <br>
-[![discord](https://img.shields.io/discord/1216332587778179072?label=discord)](https://discord.gg/coder)
-[![license](https://img.shields.io/github/license/optiop/postgres-grafana-on-ecs)](./LICENSE)
+
+[
+  ![Discord](https://img.shields.io/discord/1216332587778179072)
+](https://discord.gg/WkA4PM2dna)
+[
+  ![license](https://img.shields.io/github/license/optiop/postgres-grafana-on-ecs)
+](./LICENSE)
+
 </div>
