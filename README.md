@@ -1,9 +1,9 @@
 <div align="center">
   <a href="https://optiop.org#gh-light-mode-only">
-    <img src="./docs/images/optiop.logo.long.dark.png#gh-light-mode-only" style="height: 48px">
+    <img src="./docs/images/optiop.logo.long.light.png#gh-light-mode-only" style="height: 48px">
   </a>
   <a href="https://optiop.org#gh-dark-mode-only">
-    <img src="./docs/images/optiop.logo.long.light.png#gh-dark-mode-only" style="height: 48px">
+    <img src="./docs/images/optiop.logo.long.dark.png#gh-dark-mode-only" style="height: 48px">
   </a>
 
   <h1>
