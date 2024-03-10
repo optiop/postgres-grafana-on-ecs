@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://optiop.org#gh-dark-mode-only">
+  <a href="https://optiop.org#gh-light-mode-only">
     <img src="./docs/images/favi.optiop.dark.png#gh-light-mode-only" style="width: 64px">
   </a>
   <a href="https://optiop.org#gh-dark-mode-only">
@@ -11,10 +11,10 @@
   </h1>
 
   <a href="https://optiop.org#gh-light-mode-only">
-    <img src="./docs/images/banner.light.png#gh-light-mode-only" style="height: 64px">
+    <img src="./docs/images/banner.light.png#gh-light-mode-only" style="height: 48px">
   </a>
   <a href="https://coder.com#gh-dark-mode-only">
-    <img src="./docs/images/banner.dark.png#gh-dark-mode-only" style="height: 64px">
+    <img src="./docs/images/banner.dark.png#gh-dark-mode-only" style="height: 48px">
   </a>
 
   <br>
