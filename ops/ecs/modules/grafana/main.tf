@@ -29,21 +29,25 @@ resource "aws_ecs_task_definition" "task" {
       memory : 512,
       environment : [
         {
-          "name" : "DB_USER",
+          "name" : "POSTGRES_USER",
           "value" : jsondecode(data.aws_secretsmanager_secret_version.configs.secret_string)["DATABASE_USERNAME"]
         },
         {
-          "name" : "DB_PASSWORD",
+          "name" : "POSTGRES_PASSWORD",
           "value" : jsondecode(data.aws_secretsmanager_secret_version.configs.secret_string)["DATABASE_PASSWORD"]
         },
         {
-          "name" : "DB_HOST",
+          "name" : "POSTGRES_HOST",
           "value" : jsondecode(data.aws_secretsmanager_secret_version.configs.secret_string)["DATABASE_HOST"]
         },
         {
-          "name" : "DB_NAME",
+          "name" : "POSTGRES_DB",
           "value" : jsondecode(data.aws_secretsmanager_secret_version.configs.secret_string)["DATABASE_NAME"]
         },
+        {
+          "name" : "POSTGRES_PORT",
+          "value" : "5432"
+        }
       ]
       logConfiguration : {
         logDriver : "awslogs",
@@ -64,7 +68,7 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 resource "aws_service_discovery_service" "grafana" {
-  name = "grafana-service"
+  name = "grafana"
   dns_config {
     namespace_id = var.namespace_id
     dns_records {
@@ -81,7 +85,7 @@ resource "aws_cloudwatch_log_group" "log_group" {
 
 # Creating an ECS service
 resource "aws_ecs_service" "service" {
-  name            = "grafana-service"
+  name            = "grafana"
   cluster         = var.cluster_id
   task_definition = aws_ecs_task_definition.task.arn
   desired_count   = 1

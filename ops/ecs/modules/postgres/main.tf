@@ -62,7 +62,7 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 resource "aws_service_discovery_service" "database" {
-  name = "database-service"
+  name = "postgres"
   dns_config {
     namespace_id = var.namespace_id
     dns_records {
@@ -79,7 +79,7 @@ resource "aws_cloudwatch_log_group" "log_group" {
 
 # Creating an ECS service
 resource "aws_ecs_service" "service" {
-  name            = "database-service"
+  name            = "postgres"
   cluster         = var.cluster_id
   task_definition = aws_ecs_task_definition.task.arn
   desired_count   = 1
@@ -92,7 +92,7 @@ resource "aws_ecs_service" "service" {
 
   service_registries {
     registry_arn   = aws_service_discovery_service.database.arn
-    container_name = "database-service"
+    container_name = "postgres"
   }
 
   lifecycle {
