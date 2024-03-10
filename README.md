@@ -13,7 +13,7 @@
   <a href="https://optiop.org#gh-light-mode-only">
     <img src="./docs/images/banner.light.png#gh-light-mode-only" style="height: 48px">
   </a>
-  <a href="https://coder.com#gh-dark-mode-only">
+  <a href="https://optiop.org#gh-dark-mode-only">
     <img src="./docs/images/banner.dark.png#gh-dark-mode-only" style="height: 48px">
   </a>
 
