@@ -23,7 +23,7 @@ resource "aws_ecs_task_definition" "task" {
     {
       name : "grafana",
       image : data.aws_ecr_repository.repository.repository_url,
-      container_name: "grafana",
+      container_name : "grafana",
       essential : true,
       cpu : 512,
       memory : 512,

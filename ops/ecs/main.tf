@@ -14,7 +14,7 @@ module "cluster" {
 
 module "grafana" {
   source              = "./modules/grafana"
-  repository_name       = "postgres-grafana-on-ecs-grafana-repo"
+  repository_name     = "postgres-grafana-on-ecs-grafana-repo"
   cluster_id          = module.cluster.cluster_id
   vpc_id              = module.vpc.vpc_id
   vpc_public_subnets  = module.vpc.public_subnets
@@ -27,7 +27,7 @@ module "grafana" {
 
 module "postgres" {
   source              = "./modules/postgres"
-  repository_name       = "postgres-grafana-on-ecs-postgres-repo"
+  repository_name     = "postgres-grafana-on-ecs-postgres-repo"
   cluster_id          = module.cluster.cluster_id
   vpc_id              = module.vpc.vpc_id
   vpc_public_subnets  = module.vpc.public_subnets
