@@ -23,6 +23,9 @@
   ![Discord](https://img.shields.io/discord/1216332587778179072)
 ](https://discord.gg/WkA4PM2dna)
 [
+  ![Blog](https://img.shields.io/badge/blog-optiop-blue)
+](https://optiop.org/blog/content/visualize-postgres-data-using-grafana-ecs/index.html)
+[
   ![license](https://img.shields.io/github/license/optiop/postgres-grafana-on-ecs)
 ](./LICENSE)
 
