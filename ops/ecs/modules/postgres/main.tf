@@ -23,16 +23,16 @@ resource "aws_ecs_task_definition" "task" {
     {
       name : "postgres",
       image : data.aws_ecr_repository.repository.repository_url,
-      container_name: "postgres",
-      container_port: 5432,
+      container_name : "postgres",
+      container_port : 5432,
       essential : true,
       cpu : 512,
       memory : 1024,
       portMappings : [
         {
           containerPort : 5432,
-          hostPort      : 5432,
-          protocol      : "tcp"
+          hostPort : 5432,
+          protocol : "tcp"
         }
       ],
       logConfiguration : {

@@ -17,6 +17,7 @@ jobs:
 
     - name: Terraform linter
       run: |
+        terraform version
         results=$(find . -type f -name "*.tf" ! -path "*/.terraform/*" -exec terraform fmt -check {} \;)
         if [ -n "$results" ]; then
           echo "Terraform files must be formatted with 'terraform fmt'. Please run 'terraform fmt' and commit the changes."
