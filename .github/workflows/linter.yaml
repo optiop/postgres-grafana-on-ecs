@@ -1,0 +1,20 @@
+name: Linters and formatters
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Terraform linter
+      run: |
+        find . -type f -name "*.tf" ! -path "*/.terraform/*" -exec terraform fmt -check {} \;
