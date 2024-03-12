@@ -24,3 +24,20 @@ jobs:
           echo "$results"
           exit 1
         fi
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+
+    - name: Install yamllint
+      run: pip install yamllint
+    
+    - name: YAML linter
+      run: |
+        results=$(find . -type f -name "*.yaml" -o -name "*.yml" -exec yamllint {} \;)
+        if [ -n "$results" ]; then
+          echo "YAML files must be formatted with 'yamllint'. Please run 'yamllint' and commit the changes."
+          echo "$results"
+          exit 1
+        fi
