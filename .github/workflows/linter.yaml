@@ -19,7 +19,7 @@ jobs:
       - name: Terraform linter
         run: |
           terraform version
-          terraform -recursive fmt -check
+          terraform fmt -check -recursive
 
       - name: Set up Python
         uses: actions/setup-python@v5
