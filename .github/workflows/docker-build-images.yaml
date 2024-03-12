@@ -43,7 +43,7 @@ jobs:
           context: ./src/${{ matrix.image }}
           push: ${{ github.event_name == 'push' &&
                     github.ref == 'refs/heads/main' }}
-          tags: '615677714887.dkr.ecr.eu-central-1.amazonaws.com/
+          tags: '615677714887.dkr.ecr.eu-central-1.amazonaws.com/\
                 postgres-grafana-on-ecs-${{ matrix.image }}-repo'
           cache-from: type=gha
           cache-to: type=gha,mode=max
