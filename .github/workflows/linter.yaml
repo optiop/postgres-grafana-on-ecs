@@ -19,7 +19,7 @@ jobs:
       run: |
         terraform version
         results=$(find . -type f -name "*.tf" ! -path "*/.terraform/*" -exec terraform fmt -check {} \;)
-        if [ -n "$results" ]; then
+        if [[ -n "$results" ]]; then
           echo "Terraform files must be formatted with 'terraform fmt'. Please run 'terraform fmt' and commit the changes."
           echo "$results"
           exit 1
@@ -36,7 +36,7 @@ jobs:
     - name: YAML linter
       run: |
         results=$(find . -type f -name "*.yaml" -o -name "*.yml" -exec yamllint {} \;)
-        if [ -n "$results" ]; then
+        if [[ -n "$results" ]]; then
           echo "YAML files must be formatted with 'yamllint'. Please run 'yamllint' and commit the changes."
           echo "$results"
           exit 1
