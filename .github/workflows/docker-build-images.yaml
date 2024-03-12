@@ -1,13 +1,15 @@
+---
 name: Docker build images
 
-on:
+on:                           # yamllint disable-line rule:truthy
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   AWS_REGION: eu-central-1
+  AWS_ROLE: arn:aws:iam::615677714887:role/postgres-grafana-on-ecs-role
 
 permissions:
   id-token: write
@@ -18,28 +20,30 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: [ 'grafana', 'postgres' ]
+        image: ['grafana', 'postgres']
     steps:
-    - uses: actions/checkout@v4
- 
-    - name: Set AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: arn:aws:iam::615677714887:role/postgres-grafana-on-ecs-role
-        aws-region: ${{ env.AWS_REGION }}
+      - uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
-    
-    - name: Build, tag, and push docker image to Amazon ECR
-      uses: docker/build-push-action@v5
-      with:
-        context: ./src/${{ matrix.image }}
-        push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        tags: 615677714887.dkr.ecr.eu-central-1.amazonaws.com/postgres-grafana-on-ecs-${{ matrix.image }}-repo
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+      - name: Set AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push docker image to Amazon ECR
+        uses: docker/build-push-action@v5
+        with:
+          context: ./src/${{ matrix.image }}
+          push: ${{ github.event_name == 'push' &&
+                    github.ref == 'refs/heads/main' }}
+          tags: "615677714887.dkr.ecr.eu-central-1.amazonaws.com/\
+                postgres-grafana-on-ecs-${{ matrix.image }}-repo"
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
