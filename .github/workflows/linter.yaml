@@ -32,3 +32,8 @@ jobs:
       - name: YAML linter
         run: |
           yamllint --strict .
+
+      - name: YAML linter
+        run: |
+          podman run --rm -i ghcr.io/hadolint/hadolint < src/grafana/Dockerfile
+          podman run --rm -i ghcr.io/hadolint/hadolint < src/postgres/Dockerfile
