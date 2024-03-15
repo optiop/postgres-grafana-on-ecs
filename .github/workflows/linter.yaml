@@ -35,4 +35,4 @@ jobs:
 
       - name: YAML linter
         run: |
-          echo "hello  world22"   
+          echo "hello  world22"
