@@ -87,7 +87,7 @@ resource "aws_ecs_service" "service" {
 
   network_configuration {
     security_groups = [var.security_group_id]
-    subnets         = var.vpc_public_subnets
+    subnets         = var.vpc_private_subnets
   }
 
   service_registries {

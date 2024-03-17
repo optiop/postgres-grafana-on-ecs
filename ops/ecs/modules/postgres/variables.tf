@@ -13,7 +13,7 @@ variable "vpc_id" {
   description = "The ID of the VPC to which the container should be deployed."
 }
 
-variable "vpc_public_subnets" {
+variable "vpc_private_subnets" {
   type        = list(string)
   description = "The public subnets to which the container should be deployed."
 }

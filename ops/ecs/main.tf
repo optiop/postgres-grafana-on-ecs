@@ -8,6 +8,7 @@ module "cluster" {
   name                  = "ecs-cluster"
   vpc_security_group_id = module.vpc.security_group_id
   vpc_public_subnets    = module.vpc.public_subnets
+  vpc_private_subnets   = module.vpc.private_subnets
 
   depends_on = [module.vpc]
 }
@@ -18,6 +19,7 @@ module "grafana" {
   cluster_id          = module.cluster.cluster_id
   vpc_id              = module.vpc.vpc_id
   vpc_public_subnets  = module.vpc.public_subnets
+  vpc_private_subnets = module.vpc.private_subnets
   security_group_id   = module.vpc.security_group_id
   namespace_id        = module.vpc.namespace_id
   secret_manager_name = var.secret_manager_name
@@ -30,7 +32,7 @@ module "postgres" {
   repository_name     = "postgres-grafana-on-ecs-postgres-repo"
   cluster_id          = module.cluster.cluster_id
   vpc_id              = module.vpc.vpc_id
-  vpc_public_subnets  = module.vpc.public_subnets
+  vpc_private_subnets = module.vpc.private_subnets
   security_group_id   = module.vpc.security_group_id
   namespace_id        = module.vpc.namespace_id
   secret_manager_name = var.secret_manager_name

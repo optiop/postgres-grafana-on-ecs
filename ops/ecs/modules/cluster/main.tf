@@ -11,7 +11,7 @@ resource "aws_ecs_cluster" "cluster" {
 resource "aws_launch_configuration" "ecs_cfg" {
   name          = "ecs-instance"
   image_id      = "ami-06581a55723db5feb"
-  instance_type = "t2.small"
+  instance_type = var.instance_type
 
   iam_instance_profile = aws_iam_instance_profile.ecsInstanceRole.name
 
@@ -28,7 +28,7 @@ resource "aws_launch_configuration" "ecs_cfg" {
 resource "aws_autoscaling_group" "ecs_instance_asg" {
   launch_configuration = aws_launch_configuration.ecs_cfg.name
 
-  vpc_zone_identifier = var.vpc_public_subnets
+  vpc_zone_identifier = concat(var.vpc_public_subnets, var.vpc_private_subnets)
   min_size            = 2
   max_size            = 2
   desired_capacity    = 2
