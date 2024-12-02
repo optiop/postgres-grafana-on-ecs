@@ -1,11 +1,11 @@
----
-version: "3.8"
-
 services:
   grafana:
-    build: ./grafana
+    image: grafana/grafana:latest
     ports:
       - 3000:3000
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
